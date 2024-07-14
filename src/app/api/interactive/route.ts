@@ -33,7 +33,7 @@ const openai = new OpenAI();
 export async function POST(req: Request, { params: _params }: { params: any }) {
   const json: any = await req.json();
 
-  const model = 'gpt-3.5-turbo';
+  const model = process.env.OPENAI_API_KEY ? 'gpt-3.5-turbo' : "meta-llama/Llama-3-8b-chat-hf";
 
   const res = await openai.chat.completions.create({
     model,

@@ -10,15 +10,17 @@ export default function Home() {
 
   const { isLoading, streamSuggestion, currentSuggestion} = useInteractive();
 
-  const [code, setCode] = useState('hello');
+  const [code, setCode] = useState('welcome');
+  const [history, setHistory] = useState<string[]>([]);
 
   const updateSuggestion = async (instruction: string) => {
     await streamSuggestion(instruction);
+    setHistory((history) => [instruction, ...history]);
   };
 
   const debouncedUpdateSuggestion = useCallback(
     debounce(updateSuggestion, 1000, { leading: true, trailing: true }),
-    [updateSuggestion]
+    []
   );
 
   return (
@@ -29,6 +31,11 @@ export default function Home() {
         </pre>
       </Card>
       <Input className="w-[800px]" type="text" placeholder="Enter instruction" onChange={(e) => debouncedUpdateSuggestion(e.target.value)} />
+      <div className="w-[800px]">
+        {history.map((oldInstruction, index) => (
+          <p className="text-gray-300" key={oldInstruction + index}>{oldInstruction}</p>  
+      ))}
+      </div>
     </div>
   );
 }
