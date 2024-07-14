@@ -20,9 +20,14 @@ const USER_PROMPT = (instruction: string) =>  `
 HERE IS THE INSTRUCTION: ${instruction}
 `;
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+
+const config = process.env.OPENAI_API_KEY ?{
+  apiKey: process.env.OPENAI_API_KEY
+} : {
+  apiKey: process.env.TOGETHER_API_KEY,
+  base_url: "https://api.together.xyz/v1"
+}
+const openai = new OpenAI();
 
 
 export async function POST(req: Request, { params: _params }: { params: any }) {

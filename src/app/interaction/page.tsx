@@ -23,12 +23,12 @@ export default function Home() {
 
   return (
     <div className="flex justify-center items-center h-screen w-full flex-col gap-y-4">
-      <Card className="p-2 w-[600px]">
-        <pre>
+      <Card className={`p-2 w-[800px] ${isLoading ? 'border-2 border-green-500' : ''}`}>
+         <pre>
           {currentSuggestion}
         </pre>
       </Card>
-      <Input className="w-[600px]" type="text" placeholder="Enter instruction" onChange={(e) => debouncedUpdateSuggestion(e.target.value)} />
+      <Input className="w-[800px]" type="text" placeholder="Enter instruction" onChange={(e) => debouncedUpdateSuggestion(e.target.value)} />
     </div>
   );
 }
