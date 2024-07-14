@@ -27,7 +27,7 @@ export default function Home() {
     <div className="flex justify-center items-center h-screen w-full flex-col gap-y-4">
       <Card className={`p-2 w-[800px] ${isLoading ? 'border-2 border-green-500' : ''}`}>
          <pre>
-          {currentSuggestion}
+          {currentSuggestion || "Enter instruction to view code."}
         </pre>
       </Card>
       <Input className="w-[800px]" type="text" placeholder="Enter instruction" onChange={(e) => debouncedUpdateSuggestion(e.target.value)} />
